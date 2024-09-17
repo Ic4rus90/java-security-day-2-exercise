@@ -45,9 +45,6 @@ public class User {
     @Size(max = 120)
     private String password;
 
-    @Column(name = "createdAt")
-    private LocalDateTime createdAt;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     // TODO: Research this
@@ -57,8 +54,4 @@ public class User {
     @JsonManagedReference
     private List<Loan> rentedVideoGames;
 
-    @PrePersist
-    private void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
 }

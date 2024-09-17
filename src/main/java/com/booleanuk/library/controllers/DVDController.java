@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/boardgames")
+@RequestMapping("/dvds")
 public class DVDController extends GenericController<DVD, DVDRepository> {
 
     @Override

@@ -5,7 +5,7 @@ import com.booleanuk.library.repository.BookRepository;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/boardgames")
+@RequestMapping("/books")
 public class BookController extends GenericController<Book, BookRepository> {
 
     @Override

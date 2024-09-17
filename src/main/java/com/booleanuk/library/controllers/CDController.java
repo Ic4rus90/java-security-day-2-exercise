@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/boardgames")
+@RequestMapping("/cds")
 public class CDController extends GenericController<CD, CDRepository> {
 
     @Override
