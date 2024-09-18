@@ -1,12 +1,11 @@
-package com.booleanuk.library.controllers;
+package com.booleanuk.library.controller;
 
 import com.booleanuk.library.dto.LoanDTO;
-import com.booleanuk.library.models.*;
+import com.booleanuk.library.model.*;
 import com.booleanuk.library.repository.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Repository;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -98,7 +97,7 @@ public class LoanController {
                         .findById(loanDTO.getItemId())
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cd with provided id does not exist"));
             case ("dvd"):
-                return this.cdRepository
+                return this.dvdRepository
                         .findById(loanDTO.getItemId())
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dvd with provided id does not exist"));
             case ("video_game"):

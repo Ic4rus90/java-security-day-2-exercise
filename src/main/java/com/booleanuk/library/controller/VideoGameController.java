@@ -1,6 +1,6 @@
-package com.booleanuk.library.controllers;
+package com.booleanuk.library.controller;
 
-import com.booleanuk.library.models.VideoGame;
+import com.booleanuk.library.model.VideoGame;
 
 import com.booleanuk.library.repository.VideoGamesRepository;
 import org.springframework.web.bind.annotation.*;

@@ -1,19 +1,19 @@
-package com.booleanuk.library.controllers;
+package com.booleanuk.library.controller;
 
-import com.booleanuk.library.models.Loan;
 import com.booleanuk.library.repository.LoanRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/videogames")
 public abstract class GenericController<I, R extends JpaRepository<I, Integer>> {
 
     @Autowired
@@ -24,6 +24,7 @@ public abstract class GenericController<I, R extends JpaRepository<I, Integer>> 
 
 
     @PostMapping
+    // @PreAuthorize("hasRole('ADMIN')")
     public I addItem (@Valid @RequestBody I item, BindingResult result){
 
         if (result.hasErrors()) {
@@ -34,13 +35,14 @@ public abstract class GenericController<I, R extends JpaRepository<I, Integer>> 
     }
 
     @GetMapping
-    public List<I> getAllVideoGames(){
-
+    // @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public List<I> getAllItems(){
         return this.repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public I item (@PathVariable (name = "id") int id){
+    // @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public I getItemById (@PathVariable (name = "id") int id){
 
         return this.repository.findById(id)
                 .orElseThrow(
@@ -48,7 +50,8 @@ public abstract class GenericController<I, R extends JpaRepository<I, Integer>> 
     }
 
     @PutMapping("/{id}")
-    public I item (@PathVariable (name = "id") int id, @RequestBody I updatedItem){
+    // @PreAuthorize("hasRole('ADMIN')")
+    public I updateItem (@PathVariable (name = "id") int id, @RequestBody I updatedItem){
 
         return this.repository.findById(id).map(i -> {
             updateItemValues(i, updatedItem);
@@ -57,6 +60,7 @@ public abstract class GenericController<I, R extends JpaRepository<I, Integer>> 
     }
 
     @DeleteMapping("/{id}")
+    // @PreAuthorize("hasRole('ADMIN')")
     public I deleteItem(@PathVariable (name = "id") int id){
         return this.repository.findById(id).map(item -> {
             this.repository.delete(item);

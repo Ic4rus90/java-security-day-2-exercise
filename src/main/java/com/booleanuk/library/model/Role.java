@@ -1,4 +1,4 @@
-package com.booleanuk.library.models;
+package com.booleanuk.library.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,8 +22,4 @@ public class Role {
     @Column(length = 20)
     // Set the length of the column in the database.
     private ERole name;
-
-
-
-
 }

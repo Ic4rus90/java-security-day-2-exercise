@@ -1,7 +1,7 @@
 package com.booleanuk.library.repository;
 
-import com.booleanuk.library.models.ERole;
-import com.booleanuk.library.models.Role;
+import com.booleanuk.library.model.ERole;
+import com.booleanuk.library.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

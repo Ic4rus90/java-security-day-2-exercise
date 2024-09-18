@@ -1,9 +1,10 @@
-package com.booleanuk.library.controllers;
+package com.booleanuk.library.controller;
 
-import com.booleanuk.library.models.BoardGame;
+import com.booleanuk.library.model.BoardGame;
 
 import com.booleanuk.library.repository.BoardGameRepository;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/boardgames")

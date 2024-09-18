@@ -1,8 +1,8 @@
-package com.booleanuk.library.controllers;
+package com.booleanuk.library.controller;
 
-import com.booleanuk.library.models.Loan;
+import com.booleanuk.library.model.Loan;
 import com.booleanuk.library.repository.LoanRepository;
-import com.booleanuk.library.models.User;
+import com.booleanuk.library.model.User;
 import com.booleanuk.library.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

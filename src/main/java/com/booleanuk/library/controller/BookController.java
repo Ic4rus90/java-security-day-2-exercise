@@ -1,6 +1,6 @@
-package com.booleanuk.library.controllers;
+package com.booleanuk.library.controller;
 
-import com.booleanuk.library.models.Book;
+import com.booleanuk.library.model.Book;
 import com.booleanuk.library.repository.BookRepository;
 import org.springframework.web.bind.annotation.*;
 

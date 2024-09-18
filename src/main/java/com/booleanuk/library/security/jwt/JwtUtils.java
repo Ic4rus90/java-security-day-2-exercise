@@ -1,7 +1,10 @@
 package com.booleanuk.library.security.jwt;
 
 import com.booleanuk.library.security.services.UserDetailsImpl;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
@@ -18,7 +21,6 @@ public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
     @Value("${booleanuk.app.jwtSecret}")
-    // Will take the value from the given location and insert it.
     private String jwtSecret;
 
     @Value("${booleanuk.app.jwtExpirationMs}")
@@ -30,8 +32,8 @@ public class JwtUtils {
         return Jwts.builder()
                 .subject((userPrincipal.getUsername()))
                 .issuedAt(new Date())
-                .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(key())
+                .expiration(new Date((new Date()).getTime() + this.jwtExpirationMs))
+                .signWith(this.key())
                 .compact();
     }
 
@@ -40,13 +42,7 @@ public class JwtUtils {
     }
 
     public String getUserNameFromJwtToken(String token) {
-        return Jwts
-                .parser()
-                .verifyWith(key())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload()
-                .getSubject();
+        return Jwts.parser().verifyWith(this.key()).build().parseSignedClaims(token).getPayload().getSubject();
     }
 
     public boolean validateJwtToken(String authToken) {
@@ -56,13 +52,12 @@ public class JwtUtils {
         } catch (MalformedJwtException e) {
             logger.error("Invalid JWT token: {}", e.getMessage());
         } catch (ExpiredJwtException e) {
-            logger.error("JWT token is expired: {}", e.getMessage());
+            logger.error("JWT token has expired: {}", e.getMessage());
         } catch (UnsupportedJwtException e) {
             logger.error("JWT token is unsupported: {}", e.getMessage());
         } catch (IllegalArgumentException e) {
             logger.error("JWT claims string is empty: {}", e.getMessage());
         }
-
         return false;
     }
 }

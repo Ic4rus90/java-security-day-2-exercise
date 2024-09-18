@@ -1,4 +1,4 @@
-package com.booleanuk.library.payload.response;
+package com.booleanuk.library.payload.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

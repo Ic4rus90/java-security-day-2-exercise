@@ -1,6 +1,6 @@
-package com.booleanuk.library.controllers;
+package com.booleanuk.library.controller;
 
-import com.booleanuk.library.models.CD;
+import com.booleanuk.library.model.CD;
 import com.booleanuk.library.repository.CDRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

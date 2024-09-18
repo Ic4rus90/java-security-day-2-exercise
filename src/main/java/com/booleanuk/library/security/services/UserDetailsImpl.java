@@ -1,7 +1,6 @@
 package com.booleanuk.library.security.services;
 
-
-import com.booleanuk.library.models.User;
+import com.booleanuk.library.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,32 +37,12 @@ public class UserDetailsImpl implements UserDetails {
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
-
-        return new UserDetailsImpl(user.getId(),
+        return new UserDetailsImpl(
+                user.getId(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
                 authorities);
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 
     @Override

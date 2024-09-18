@@ -1,10 +1,10 @@
-package com.booleanuk.library.controllers;
+package com.booleanuk.library.controller;
 
-import com.booleanuk.library.models.ERole;
-import com.booleanuk.library.models.Role;
-import com.booleanuk.library.models.User;
-import com.booleanuk.library.payload.response.LoginRequest;
-import com.booleanuk.library.payload.response.SignupRequest;
+import com.booleanuk.library.model.ERole;
+import com.booleanuk.library.model.Role;
+import com.booleanuk.library.model.User;
+import com.booleanuk.library.payload.request.LoginRequest;
+import com.booleanuk.library.payload.request.SignupRequest;
 import com.booleanuk.library.payload.response.JwtResponse;
 import com.booleanuk.library.payload.response.MessageResponse;
 import com.booleanuk.library.repository.RoleRepository;
@@ -77,15 +77,11 @@ public class AuthController {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found"));
             roles.add(userRole);
         } else {
-            strRoles.forEach((role) -> {
+            strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found"));
                         roles.add(adminRole);
-                        break;
-                    case "mod":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR).orElseThrow(() -> new RuntimeException("Error: Role is not found"));
-                        roles.add(modRole);
                         break;
                     default:
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found"));

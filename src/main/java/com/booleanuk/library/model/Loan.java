@@ -1,4 +1,4 @@
-package com.booleanuk.library.models;
+package com.booleanuk.library.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
